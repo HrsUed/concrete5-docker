@@ -95,7 +95,7 @@ ARG DB_PASSWORD=secret
 ARG DB_DATABASE=${site_name}
 ARG SITE=${site_name}
 ARG STARTING_POINT=elemental_full
-ARG ADMIN-PASSWORD=concrete5
+ARG ADMIN_PASSWORD=concrete5
 ARG LANGUAGE=ja_JP
 ARG SITE_LOCALE=ja_JP
 
@@ -109,7 +109,7 @@ RUN ./concrete/bin/concrete5 c5:install \
     # --canonical-ssl-url=${CANONICAL_SSL_URL} \
     --starting-point ${STARTING_POINT} \
     # --admin-email=${ADMIN_EMAIL} \
-    --admin-password ${ADMIN-PASSWORD} \
+    --admin-password ${ADMIN_PASSWORD} \
     # --demo-username=${DEMO_USERNAME} \
     # --demo-password=${DEMO_PASSWORD} \
     # --demo-email=${DEMO_EMAIL} \
