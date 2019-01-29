@@ -68,6 +68,9 @@ RUN useradd -m -d /home/concrete5 -s /bin/bash concrete5 \
 COPY --chown=concrete5:concrete5 patches/composer.json /public/${site_name}
 COPY --chown=concrete5:concrete5 patches/UnitOfWork.php /public/${site_name}/concrete/vendor/doctrine/orm/lib/Doctrine/ORM
 COPY --chown=concrete5:concrete5 patches/simple_html_dom.php /public/${site_name}/concrete/vendor/sunra/php-simple-html-dom-parser/Src/Sunra/PhpSimple/simplehtmldom_1_5
+COPY --chown=concrete5:concrete5 patches/FileGenerator.php /public/${site_name}/concrete/vendor/zendframework/zend-code/src/Generator/
+COPY --chown=concrete5:concrete5 patches/MethodReflection.php /public/${site_name}/concrete/vendor/zendframework/zend-code/src/Reflection/
+COPY --chown=concrete5:concrete5 patches/ArrayObject.php /public/${site_name}/concrete/vendor/zendframework/zend-stdlib/src/
 
 WORKDIR /public/${site_name}
 RUN chmod 664 composer.json
@@ -78,6 +81,14 @@ RUN chmod 664 UnitOfWork.php
 WORKDIR /public/${site_name}/concrete/vendor/sunra/php-simple-html-dom-parser/Src/Sunra/PhpSimple/simplehtmldom_1_5
 RUN chmod 664 simple_html_dom.php
 
+WORKDIR /public/${site_name}/concrete/vendor/zendframework/zend-code/src/Generator/
+RUN chmod 664 FileGenerator.php
+
+WORKDIR /public/${site_name}/concrete/vendor/zendframework/zend-code/src/Reflection/
+RUN chmod 664 MethodReflection.php
+
+WORKDIR /public/${site_name}/concrete/vendor/zendframework/zend-stdlib/src/
+RUN chmod 664 ArrayObject.php
 
 ###################################
 # Create concrete5 project
