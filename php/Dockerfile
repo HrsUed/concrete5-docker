@@ -40,7 +40,7 @@ RUN docker-php-ext-enable mcrypt
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ###################################
-# Install concrete5
+# Deploy concrete5 source files
 ###################################
 RUN mkdir -m 755 /public
 
@@ -64,6 +64,7 @@ RUN useradd -m -d /home/concrete5 -s /bin/bash concrete5 \
 
 ###################################
 # Patches
+###################################
 COPY --chown=concrete5:concrete5 patches/composer.json /public/${site_name}
 COPY --chown=concrete5:concrete5 patches/UnitOfWork.php /public/${site_name}/concrete/vendor/doctrine/orm/lib/Doctrine/ORM
 COPY --chown=concrete5:concrete5 patches/simple_html_dom.php /public/${site_name}/concrete/vendor/sunra/php-simple-html-dom-parser/Src/Sunra/PhpSimple/simplehtmldom_1_5
@@ -76,12 +77,18 @@ RUN chmod 664 UnitOfWork.php
 
 WORKDIR /public/${site_name}/concrete/vendor/sunra/php-simple-html-dom-parser/Src/Sunra/PhpSimple/simplehtmldom_1_5
 RUN chmod 664 simple_html_dom.php
-###################################
 
+
+###################################
+# Create concrete5 project
+###################################
 USER concrete5
 WORKDIR /public/${site_name}
 RUN composer create-project -n concrete5/composer ${site_name}
 
+###################################
+# Install concrete5
+###################################
 ARG DB_SERVER="172.17.0.2"
 ARG DB_USERNAME=root
 ARG DB_PASSWORD=secret
