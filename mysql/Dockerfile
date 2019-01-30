@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 VOLUME /var/lib/mysql
 # Config files
 COPY config/ /etc/mysql/
+
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN rm /entrypoint.sh \
     && ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh

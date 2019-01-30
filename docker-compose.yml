@@ -1,0 +1,31 @@
+version: "3"
+services:
+  mysql:
+    build: ./mysql/
+    container_name: mysql
+    ports:
+      - 33061:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      c5nw:
+        ipv4_address: 172.16.1.1
+  php:
+    build: ./php/
+    container_name: php
+    ports:
+      - 8080:8000
+    depends_on:
+      - mysql
+    environment:
+      DB_SERVER: 172.16.1.1
+    networks:
+      c5nw:
+        ipv4_address: 172.16.1.2
+networks:
+  c5nw:
+    driver: bridge
+    ipam:
+      config:
+      -
+        subnet: 172.16.1.0/20

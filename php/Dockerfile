@@ -132,6 +132,10 @@ RUN ./concrete/bin/concrete5 c5:install \
     # --attach \
     # --force-attach
 
+WORKDIR /public/${site_name}
+RUN mkdir -p application/languages/ja_JP/LC_MESSAGES
+COPY locales/translations-ja_JP.mo application/languages/ja_JP/LC_MESSAGES/messages.mo
+
 USER root
 
 # For debugging
