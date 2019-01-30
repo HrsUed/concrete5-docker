@@ -6,10 +6,8 @@ ARG c5user_pass=concrete5
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # To unzip concrete5 assets
     unzip \
-    # For debugging
-    iputils-ping \
-    net-tools \
-    procps \
+    # To localize JP
+    gettext \
   && rm -rf /var/lib/apt/lists/*
 
 # Requirements for concrete5
