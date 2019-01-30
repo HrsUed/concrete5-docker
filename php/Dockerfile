@@ -98,7 +98,7 @@ RUN composer create-project -n concrete5/composer ${site_name}
 ###################################
 # Install concrete5
 ###################################
-ARG DB_SERVER="172.17.0.2"
+ENV DB_SERVER=172.17.0.2
 ARG DB_USERNAME=root
 ARG DB_PASSWORD=secret
 ARG DB_DATABASE=${site_name}
