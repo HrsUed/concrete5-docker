@@ -134,6 +134,14 @@ RUN ./concrete/bin/concrete5 c5:install \
 
 USER root
 
+# For debugging
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    iputils-ping \
+    net-tools \
+    procps \
+    gettext \
+  && rm -rf /var/lib/apt/lists/*
+
 ENTRYPOINT ["docker-php-entrypoint"]
 WORKDIR /public/${site_name}
 CMD ["php", "-S", "0.0.0.0:8000"]
