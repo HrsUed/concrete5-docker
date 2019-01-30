@@ -108,6 +108,10 @@ ARG ADMIN_PASSWORD=concrete5
 ARG LANGUAGE=ja_JP
 ARG SITE_LOCALE=ja_JP
 
+# Create Database
+RUN mysql -h ${DB_SERVER} -u ${DB_USERNAME} --password=${DB_PASSWORD} \
+    -e "CREATE DATABASE ${DB_DATABASE};"
+
 RUN ./concrete/bin/concrete5 c5:install \
     --db-server ${DB_SERVER} \
     --db-username ${DB_USERNAME} \
